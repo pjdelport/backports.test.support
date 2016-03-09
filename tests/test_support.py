@@ -1,7 +1,7 @@
 """
 Backport of Python 3.5's test.test_support test module.
 
-Backport modifications are marked with "XXX backport".
+Backport modifications are marked with "XXX backport" and "TODO backport".
 """
 from __future__ import print_function, unicode_literals
 
@@ -73,7 +73,11 @@ class TestSupport(unittest.TestCase):
         with open(mod_filename, 'w') as f:
             print('foo = 1', file=f)
         sys.path.insert(0, os.curdir)
-        importlib.invalidate_caches()
+
+        # TODO backport: Python 3.3 adds invalidate_caches()
+        if (3, 3) <= sys.version_info:
+            importlib.invalidate_caches()
+
         try:
             mod = __import__(TESTFN)
             self.assertIn(TESTFN, sys.modules)
