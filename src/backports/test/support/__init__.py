@@ -1,5 +1,7 @@
 """
 Backport of Python 3.5's test.support package.
+
+Backport modifications are marked with "XXX backport".
 """
 from __future__ import print_function, unicode_literals
 
@@ -142,7 +144,8 @@ def _ignore_deprecated_imports(ignore=True):
         yield
 
 
-def import_module(name, deprecated=False, *, required_on=()):
+# XXX backport: No keyword-only arguments
+def import_module(name, deprecated=False, required_on=()):
     """Import and return the module to be tested, raising SkipTest if
     it is not available.
 
@@ -1328,8 +1331,9 @@ socket_peer_reset = TransientResource(OSError, errno=errno.ECONNRESET)
 ioerror_peer_reset = TransientResource(OSError, errno=errno.ECONNRESET)
 
 
+# XXX backport: No keyword-only arguments
 @contextlib.contextmanager
-def transient_internet(resource_name, *, timeout=30.0, errnos=()):
+def transient_internet(resource_name, timeout=30.0, errnos=()):
     """Return a context manager that raises ResourceDenied when various issues
     with the Internet connection manifest themselves as exceptions."""
     default_errnos = [
@@ -2225,7 +2229,8 @@ def fs_is_case_insensitive(directory):
             return False
 
 
-def detect_api_mismatch(ref_api, other_api, *, ignore=()):
+# XXX backport: No keyword-only arguments
+def detect_api_mismatch(ref_api, other_api, ignore=()):
     """Returns the set of items in ref_api not in other_api, except for a
     defined list of items to be ignored in this check.
 
