@@ -1,5 +1,13 @@
 # coding: utf-8
+import sys
 from setuptools import setup, find_packages
+
+
+# Backward-compatibility dependencies for Python 2
+_python2_requires = [
+    'backports.os',
+] if sys.version_info < (3,) else []
+
 
 setup(
     name='backports.test.support',
@@ -14,6 +22,8 @@ setup(
 
     setup_requires=['setuptools_scm'],
     use_scm_version=True,
+
+    install_requires=_python2_requires,
 
     license='Python Software Foundation License',
     classifiers=[
