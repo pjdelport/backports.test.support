@@ -1,7 +1,7 @@
 """
 Backport of Python 3.5's test.support.script_helper module.
 
-Backport modifications are marked with "XXX backport".
+Backport modifications are marked with "XXX backport" and "TODO backport".
 """
 from __future__ import unicode_literals
 
@@ -20,7 +20,10 @@ import contextlib
 import shutil
 import zipfile
 
-from importlib.util import source_from_cache
+# TODO backport: Python 3.4 adds importlib.util
+if (3,) <= sys.version_info:
+    from importlib.util import source_from_cache
+
 from backports.test.support import make_legacy_pyc, strip_python_stderr
 
 

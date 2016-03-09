@@ -1,7 +1,7 @@
 """
 Backport of Python 3.5's test.support package.
 
-Backport modifications are marked with "XXX backport".
+Backport modifications are marked with "XXX backport" and "TODO backport".
 """
 from __future__ import print_function, unicode_literals
 
@@ -19,7 +19,6 @@ import fnmatch
 import functools
 import gc
 import importlib
-import importlib.util
 import logging.handlers
 import nntplib
 import os
@@ -37,6 +36,10 @@ import time
 import unittest
 import urllib.error
 import warnings
+
+# TODO backport: Python 3.4 adds importlib.util
+if (3, 4) <= sys.version_info:
+    import importlib.util
 
 # XXX backport: Python 3.3 moves ABCs from collections to collections.abc
 if sys.version_info < (3, 3):
