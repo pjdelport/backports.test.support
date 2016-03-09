@@ -14,7 +14,6 @@ if __name__ != 'backports.test.support':
 
 import contextlib
 import errno
-import faulthandler
 import fnmatch
 import functools
 import gc
@@ -36,6 +35,10 @@ import time
 import unittest
 import urllib.error
 import warnings
+
+# TODO backport: Python 3.3 adds faulthandler
+if (3, 3) <= sys.version_info:
+    import faulthandler
 
 # TODO backport: Python 3.4 adds importlib.util
 if (3, 4) <= sys.version_info:
