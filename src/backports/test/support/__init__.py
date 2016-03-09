@@ -1398,7 +1398,9 @@ def transient_internet(resource_name, timeout=30.0, errnos=()):
             n in captured_errnos):
             if not verbose:
                 sys.stderr.write(denied.args[0] + "\n")
-            raise denied from err
+
+            # XXX backport: raise denied from err
+            raise denied
 
     old_timeout = socket.getdefaulttimeout()
     try:
@@ -1408,7 +1410,10 @@ def transient_internet(resource_name, timeout=30.0, errnos=()):
     except nntplib.NNTPTemporaryError as err:
         if verbose:
             sys.stderr.write(denied.args[0] + "\n")
-        raise denied from err
+
+        # XXX backport: raise denied from err
+        raise denied
+
     except OSError as err:
         # urllib can wrap original socket errors multiple times (!), we must
         # unwrap to get at the original error.
