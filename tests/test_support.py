@@ -92,7 +92,13 @@ class TestSupport(unittest.TestCase):
     def test_bind_port(self):
         s = socket.socket()
         support.bind_port(s)
-        s.listen()
+
+        # XXX backport: listen()'s backlog argument is required in Python < 3.5
+        if sys.version_info < (3, 5):
+            s.listen(1)
+        else:
+            s.listen()
+
         s.close()
 
     # Tests for temp_dir()
