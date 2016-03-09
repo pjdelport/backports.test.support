@@ -433,20 +433,20 @@ def forget(modname):
     for dirname in sys.path:
         source = os.path.join(dirname, modname + '.py')
 
-        # XXX backport: Python 3.5 replaces debug_override with the optimization argument.
-        if sys.version_info < (3, 5):
-            # It doesn't matter if they exist or not, unlink all possible
-            # combinations of PEP 3147 and legacy pyc and pyo files.
-            unlink(source + 'c')
-            unlink(source + 'o')
-            unlink(importlib.util.cache_from_source(source, debug_override=True))
-            unlink(importlib.util.cache_from_source(source, debug_override=False))
-        else:
-            # It doesn't matter if they exist or not, unlink all possible
-            # combinations of PEP 3147/488 and legacy pyc files.
-            unlink(source + 'c')
-            for opt in ('', 1, 2):
-                unlink(importlib.util.cache_from_source(source, optimization=opt))
+
+        # It doesn't matter if they exist or not, unlink all possible
+        # combinations of PEP 3147/488 and legacy pyc files.
+        unlink(source + 'c')
+        unlink(source + 'o')
+        # XXX backport: Python 2 lacks cache_from_source, so ignore PEP 3147/488 files in that case.
+        if (3,) < sys.version_info:
+            # XXX backport: Python 3.5 replaces debug_override with the optimization argument.
+            if sys.version_info < (3, 5):
+                unlink(importlib.util.cache_from_source(source, debug_override=True))
+                unlink(importlib.util.cache_from_source(source, debug_override=False))
+            else:
+                for opt in ('', 1, 2):
+                    unlink(importlib.util.cache_from_source(source, optimization=opt))
 
 # Check whether a gui is actually available
 def _is_gui_available():
