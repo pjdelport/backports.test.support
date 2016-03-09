@@ -1,5 +1,7 @@
 """
 Backport of Python 3.5's test.test_script_helper test module.
+
+Backport modifications are marked with "XXX backport".
 """
 from __future__ import unicode_literals
 
@@ -10,7 +12,12 @@ import subprocess
 import sys
 from backports.test.support import script_helper
 import unittest
-from unittest import mock
+
+# XXX backport: Python 3.3 adds unittest.mock
+if sys.version_info < (3, 3):
+    import mock
+else:
+    from unittest import mock
 
 
 class TestScriptHelper(unittest.TestCase):
