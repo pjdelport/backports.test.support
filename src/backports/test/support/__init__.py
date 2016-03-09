@@ -1,3 +1,7 @@
+"""
+Backport of Python 3.5's test.support package.
+"""
+# Original docstring:
 """Supporting definitions for the Python regression tests."""
 
 if __name__ != 'backports.test.support':

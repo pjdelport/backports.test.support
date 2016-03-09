@@ -1,3 +1,7 @@
+"""
+Backport of Python 3.5's test.test_support test module.
+"""
+
 import importlib
 import shutil
 import sys
