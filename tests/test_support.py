@@ -1,5 +1,7 @@
 """
 Backport of Python 3.5's test.test_support test module.
+
+Backport modifications are marked with "XXX backport".
 """
 
 import importlib
@@ -34,7 +36,8 @@ class TestSupport(unittest.TestCase):
                         self.test_get_attribute)
         self.assertRaises(unittest.SkipTest, support.get_attribute, self, "foo")
 
-    @unittest.skip("failing buildbots")
+    # XXX backport: Don't skip this for the backport.
+    # @unittest.skip("failing buildbots")
     def test_get_original_stdout(self):
         self.assertEqual(support.get_original_stdout(), sys.stdout)
 
