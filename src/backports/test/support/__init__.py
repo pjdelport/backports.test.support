@@ -768,7 +768,9 @@ SOCK_MAX_SIZE = 16 * 1024 * 1024 + 1
 
 # decorator for skipping tests on non-IEEE 754 platforms
 requires_IEEE_754 = unittest.skipUnless(
-    float.__getformat__("double").startswith("IEEE"),
+    float.__getformat__(
+        str("double")  # XXX backport: Must be bytes, not unicode, on Python 2
+    ).startswith("IEEE"),
     "test requires IEEE 754 doubles")
 
 requires_zlib = unittest.skipUnless(zlib, 'requires zlib')
