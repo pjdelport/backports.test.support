@@ -6,6 +6,7 @@ from setuptools import setup, find_packages
 # Backward-compatibility dependencies for Python 2
 _python2_requires = [
     'backports.os',
+    'future',  # For backport of surrogateescape
 ] if sys.version_info < (3,) else []
 
 

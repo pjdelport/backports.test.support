@@ -35,6 +35,11 @@ import time
 import unittest
 import warnings
 
+# XXX backport: Use backported surrogateescape for Python 2
+if sys.version_info < (3,):
+    from future.utils.surrogateescape import register_surrogateescape
+    register_surrogateescape()
+
 # XXX backport: Python 3 splits urllib
 if sys.version_info < (3,):
     from urllib2 import HTTPError, URLError
