@@ -72,7 +72,11 @@ def run_python_until_end(*args, **env_vars):
         isolated = env_vars.pop('__isolated')
     else:
         isolated = not env_vars and not env_required
-    cmd_line = [sys.executable, '-X', 'faulthandler']
+
+    # XXX backport: "-X faulthandler" is unavailable in Python < 3.3.
+    cmd_line = ([sys.executable] if sys.version_info < (3, 3) else
+                [sys.executable, '-X', 'faulthandler'])
+
     if isolated:
         # isolated mode: ignore Python environment variables, ignore user
         # site-packages, and don't add the current directory to sys.path
