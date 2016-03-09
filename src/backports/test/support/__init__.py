@@ -11,7 +11,7 @@ from __future__ import print_function, unicode_literals
 if __name__ != 'backports.test.support':
     raise ImportError('support must be imported from the test package')
 
-import collections.abc
+
 import contextlib
 import errno
 import faulthandler
@@ -37,6 +37,13 @@ import time
 import unittest
 import urllib.error
 import warnings
+
+# XXX backport: Python 3.3 moves ABCs from collections to collections.abc
+if sys.version_info < (3, 3):
+    from collections import MutableMapping
+else:
+    from collections.abc import MutableMapping
+
 
 try:
     import _thread, threading
@@ -1226,7 +1233,7 @@ class CleanImport(object):
         sys.modules.update(self.original_modules)
 
 
-class EnvironmentVarGuard(collections.abc.MutableMapping):
+class EnvironmentVarGuard(MutableMapping):
 
     """Class to help protect the environment variable properly.  Can be used as
     a context manager."""
