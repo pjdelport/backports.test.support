@@ -119,7 +119,7 @@ class TestSupport(unittest.TestCase):
         """Test passing a directory that already exists."""
         def call_temp_dir(path):
             with support.temp_dir(path) as temp_path:
-                raise Exception("should not get here")
+                raise Exception("should not get here")   # pragma: no cover (intentionally unreachable)
 
         path = tempfile.mkdtemp()
         path = os.path.realpath(path)
