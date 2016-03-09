@@ -3,14 +3,14 @@ cache: pip
 
 matrix:
   include:
-    # TODO: - { python: '2.7', env: TOXENV=py27 }
+    - { python: '2.7', env: TOXENV=py27 }
     - { python: '3.4', env: TOXENV=py34 }
     - { python: '3.5', env: TOXENV=py35 }
-    # TODO: - { python: 'pypy', env: TOXENV=pypy }
+    - { python: 'pypy', env: TOXENV=pypy }
     - { python: 'pypy3', env: TOXENV=pypy3 }
 
     # Report coverage for the latest Python 2 and 3 versions
-    # TODO: - { python: '2.7', env: TOXENV=py27-codecov }
+    - { python: '2.7', env: TOXENV=py27-codecov }
     - { python: '3.5', env: TOXENV=py35-codecov }
 
   allow_failures:
