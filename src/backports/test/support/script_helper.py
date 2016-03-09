@@ -1,6 +1,7 @@
 """
 Backport of Python 3.5's test.support.script_helper module.
 """
+from __future__ import unicode_literals
 
 # Common utility functions used by various script execution tests
 #  e.g. test_cmd_line, test_cmd_line_script and test_runpy

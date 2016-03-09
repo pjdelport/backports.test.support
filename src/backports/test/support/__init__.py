@@ -1,6 +1,8 @@
 """
 Backport of Python 3.5's test.support package.
 """
+from __future__ import print_function, unicode_literals
+
 # Original docstring:
 """Supporting definitions for the Python regression tests."""
 

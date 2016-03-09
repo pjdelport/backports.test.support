@@ -1,6 +1,8 @@
 """
 Backport of Python 3.5's test.test_script_helper test module.
 """
+from __future__ import unicode_literals
+
 # Original docstring:
 """Unittests for test.support.script_helper.  Who tests the test helper?"""
 

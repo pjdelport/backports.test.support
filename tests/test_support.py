@@ -3,6 +3,7 @@ Backport of Python 3.5's test.test_support test module.
 
 Backport modifications are marked with "XXX backport".
 """
+from __future__ import print_function, unicode_literals
 
 import importlib
 import shutil
