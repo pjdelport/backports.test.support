@@ -62,7 +62,11 @@ class TestScriptHelper(unittest.TestCase):
             popen_command = mock_popen.call_args[0][0]
             self.assertEqual(sys.executable, popen_command[0])
             self.assertIn('None', popen_command)
-            self.assertIn('-I', popen_command)
+
+            # XXX backport: "-I" is unavailable in Python < 3.4.
+            if (3, 4) <= sys.version_info:
+                self.assertIn('-I', popen_command)
+
             self.assertNotIn('-E', popen_command)  # -I overrides this
 
     @mock.patch('subprocess.Popen')

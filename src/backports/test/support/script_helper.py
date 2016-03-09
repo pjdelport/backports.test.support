@@ -80,7 +80,11 @@ def run_python_until_end(*args, **env_vars):
     if isolated:
         # isolated mode: ignore Python environment variables, ignore user
         # site-packages, and don't add the current directory to sys.path
-        cmd_line.append('-I')
+
+        # XXX backport: "-I" is unavailable in Python < 3.4.
+        if (3, 4) <= sys.version_info:
+            cmd_line.append('-I')
+
     elif not env_vars and not env_required:
         # ignore Python environment variables
         cmd_line.append('-E')
