@@ -370,20 +370,26 @@ else:
 def unlink(filename):
     try:
         _unlink(filename)
-    except (FileNotFoundError, NotADirectoryError):
-        pass
+    # XXX backport: except (FileNotFoundError, NotADirectoryError): pass
+    except OSError as e:
+        if e.errno not in [errno.ENOENT, errno.ENOTDIR]:
+            raise
 
 def rmdir(dirname):
     try:
         _rmdir(dirname)
-    except FileNotFoundError:
-        pass
+    # XXX backport: except FileNotFoundError: pass
+    except OSError as e:
+        if e.errno != errno.ENOENT:
+            raise
 
 def rmtree(path):
     try:
         _rmtree(path)
-    except FileNotFoundError:
-        pass
+    # XXX backport: except FileNotFoundError: pass
+    except OSError as e:
+        if e.errno != errno.ENOENT:
+            raise
 
 def make_legacy_pyc(source):
     """Move a PEP 3147/488 pyc file to its legacy pyc location.
@@ -2225,8 +2231,12 @@ def fs_is_case_insensitive(directory):
             case_path = base_path.lower()
         try:
             return os.path.samefile(base_path, case_path)
-        except FileNotFoundError:
-            return False
+        # XXX backport: except FileNotFoundError:
+        except OSError as e:
+            if e.errno == errno.ENOENT:
+                return False
+            else:
+                raise
 
 
 # XXX backport: No keyword-only arguments
