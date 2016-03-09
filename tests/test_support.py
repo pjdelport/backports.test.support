@@ -15,6 +15,12 @@ import tempfile
 import errno
 from backports.test import support
 
+
+# XXX backport: raw_input() became input()
+if sys.version_info < (3,):
+    input = raw_input
+
+
 TESTFN = support.TESTFN
 TESTDIRN = os.path.basename(tempfile.mkdtemp(dir='.'))
 
