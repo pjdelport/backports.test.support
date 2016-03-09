@@ -108,7 +108,3 @@ class TestScriptHelperEnvironment(unittest.TestCase):
         check_call_command = mock_check_call.call_args[0][0]
         self.assertEqual(sys.executable, check_call_command[0])
         self.assertIn('-E', check_call_command)
-
-
-if __name__ == '__main__':
-    unittest.main()
