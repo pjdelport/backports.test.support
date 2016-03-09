@@ -33,8 +33,13 @@ import sysconfig
 import tempfile
 import time
 import unittest
-import urllib.error
 import warnings
+
+# XXX backport: Python 3 splits urllib
+if sys.version_info < (3,):
+    from urllib2 import HTTPError, URLError
+else:
+    from urllib.error import HTTPError, URLError
 
 # XXX backport: Python 3.2 adds os.fsencode / fs
 if sys.version_info < (3, 2):
@@ -1390,9 +1395,9 @@ def transient_internet(resource_name, timeout=30.0, errnos=()):
         n = getattr(err, 'errno', None)
         if (isinstance(err, socket.timeout) or
             (isinstance(err, socket.gaierror) and n in gai_errnos) or
-            (isinstance(err, urllib.error.HTTPError) and
+            (isinstance(err, HTTPError) and
              500 <= err.code <= 599) or
-            (isinstance(err, urllib.error.URLError) and
+            (isinstance(err, URLError) and
                  (("ConnectionRefusedError" in err.reason) or
                   ("TimeoutError" in err.reason))) or
             n in captured_errnos):
