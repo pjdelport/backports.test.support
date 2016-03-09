@@ -2,7 +2,7 @@
 
 import subprocess
 import sys
-from test.support import script_helper
+from backports.test.support import script_helper
 import unittest
 from unittest import mock
 

@@ -1,6 +1,6 @@
 """Supporting definitions for the Python regression tests."""
 
-if __name__ != 'test.support':
+if __name__ != 'backports.test.support':
     raise ImportError('support must be imported from the test package')
 
 import collections.abc
