@@ -145,7 +145,12 @@ class TestSupport(unittest.TestCase):
         path = os.path.realpath(path)
         try:
             self.assertTrue(os.path.isdir(path))
-            self.assertRaises(FileExistsError, call_temp_dir, path)
+
+            # XXX backport: self.assertRaises(FileExistsError, call_temp_dir, path)
+            with self.assertRaises(OSError) as cm:
+                call_temp_dir(path)
+            self.assertEqual(cm.exception.errno, errno.EEXIST)
+
             # Make sure temp_dir did not delete the original directory.
             self.assertTrue(os.path.isdir(path))
         finally:
@@ -191,8 +196,11 @@ class TestSupport(unittest.TestCase):
 
         with support.temp_dir() as parent_dir:
             non_existent_dir = os.path.join(parent_dir, 'does_not_exist')
-            self.assertRaises(FileNotFoundError, call_change_cwd,
-                              non_existent_dir)
+
+            # XXX backport: self.assertRaises(FileNotFoundError, call_change_cwd, non_existent_dir)
+            with self.assertRaises(OSError) as cm:
+                call_change_cwd(non_existent_dir)
+            self.assertEqual(cm.exception.errno, errno.ENOENT)
 
         self.assertEqual(os.getcwd(), original_cwd)
 
