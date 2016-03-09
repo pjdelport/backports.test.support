@@ -36,6 +36,12 @@ import unittest
 import urllib.error
 import warnings
 
+# XXX backport: Python 3.2 adds os.fsencode / fs
+if sys.version_info < (3, 2):
+    from backports.os import fsencode, fsdecode
+else:
+    from os import fsencode, fsdecode
+
 # TODO backport: Python 3.3 adds faulthandler
 if (3, 3) <= sys.version_info:
     import faulthandler
@@ -818,7 +824,7 @@ for character in (
     '\u20AC',
 ):
     try:
-        os.fsdecode(os.fsencode(character))
+        fsdecode(fsencode(character))
     except UnicodeError:
         pass
     else:
@@ -895,7 +901,7 @@ for name in (
     try:
         name.decode(TESTFN_ENCODING)
     except UnicodeDecodeError:
-        TESTFN_UNDECODABLE = os.fsencode(TESTFN) + name
+        TESTFN_UNDECODABLE = fsencode(TESTFN) + name
         break
 
 if FS_NONASCII:
