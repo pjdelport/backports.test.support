@@ -15,7 +15,7 @@ setup(
     description="Backport of Python 3's test.support package",
     url='https://github.com/pjdelport/backports.test.support',
 
-    author=u'Piët Delport',
+    author='Pi Delport',
     author_email='pjdelport@gmail.com',
 
     package_dir={'': 'src'},
