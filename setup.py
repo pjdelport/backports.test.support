@@ -3,6 +3,11 @@ import sys
 from setuptools import setup, find_packages
 
 
+def README():
+    with open('README.rst') as f:
+        return f.read()
+
+
 # Backward-compatibility dependencies for Python 2
 _python2_requires = [
     'backports.os',
@@ -13,9 +18,10 @@ _python2_requires = [
 setup(
     name='backports.test.support',
     description="Backport of Python 3's test.support package",
+    long_description=README(),
     url='https://github.com/pjdelport/backports.test.support',
 
-    author=u'Piët Delport',
+    author='Pi Delport',
     author_email='pjdelport@gmail.com',
 
     package_dir={'': 'src'},
@@ -36,6 +42,8 @@ setup(
         'Programming Language :: Python :: 3',
         'Programming Language :: Python :: 3.4',
         'Programming Language :: Python :: 3.5',
+        'Programming Language :: Python :: 3.6',
+        'Programming Language :: Python :: Implementation :: PyPy',
         'Topic :: Software Development :: Libraries :: Python Modules',
         'Topic :: Software Development :: Testing',
     ],

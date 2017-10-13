@@ -6,7 +6,7 @@ This backports Python 3's `test.support`_ package under the backports_ namespace
 
 This is probably only interesting if you're backporting standard library test code.
 
-.. _test.support: https://docs.python.org/3.5/library/test.html#module-test.support
+.. _test.support: https://docs.python.org/3.6/library/test.html#module-test.support
 .. _backports: https://pypi.python.org/pypi/backports
 
 .. image:: https://img.shields.io/pypi/v/backports.test.support.svg
@@ -28,5 +28,5 @@ This is probably only interesting if you're backporting standard library test co
 Supported Python versions
 =========================
 
-* CPython: 2.7, 3.4, 3.5
-* PyPy
+* CPython: 2.7, 3.4, 3.5, 3.6
+* PyPy, PyPy3
