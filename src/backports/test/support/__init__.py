@@ -735,7 +735,8 @@ def _is_ipv6_enabled():
             sock = socket.socket(socket.AF_INET6, socket.SOCK_STREAM)
             sock.bind((HOSTv6, 0))
             return True
-        except (socket.error, socket.gaierror):
+        # XXX backport: Python 3.3 / PEP 3151 exception reworking.
+        except socket.error if sys.version_info < (3, 3) else OSError:
             pass
         finally:
             if sock:
